@@ -4,9 +4,8 @@ A PHP script to compare two MySQL databases and report on the differences, if an
 
 ### Usage
 
-```$MySQL_Diff = new MySQL_Diff($config);
-$data = array( 'diffs' => $MySQL_Diff->diffs );
-```
+    $MySQL_Diff = new MySQL_Diff($config);
+    $data = array( 'diffs' => $MySQL_Diff->diffs );
 
 See included example file, `db_diff.php` for configuration and usage examples.
 
