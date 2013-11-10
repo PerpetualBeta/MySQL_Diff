@@ -13,13 +13,13 @@ spl_autoload_register();
 $db_1 = array (
                 'host'      => '127.0.0.1',
                 'username'  => 'root',
-                'password'  => 'root',
+                'password'  => 'letmein',
                 'database'  => 'employees_1'
               );
 $db_2 = array (
                 'host'      => '127.0.0.1',
                 'username'  => 'root',
-                'password'  => 'root',
+                'password'  => 'letmein',
                 'database'  => 'employees_2'
               );
 /*
@@ -42,9 +42,9 @@ $template_path = __DIR__ . '/templates/';
 /**
  * Email Configuration
  */
-$to = 'urbanmainframe@gmail.com';
+$to = 'you@yourdomain.com';
 $subject = 'Database Schema Comparison';
-$headers = "From: The Perpetual Beta Bot <do-not-reply@perpetualbeta.com>\r\n";
+$headers = "From: MySQL_Diff <do-not-reply@yourdomain.com>\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
