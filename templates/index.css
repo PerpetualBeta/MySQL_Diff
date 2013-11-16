@@ -1,61 +1,61 @@
 body {
-	font-family: Helvetica, sans-serif;
-	font-size: 10pt;
-	padding: 20px 20px 40px;
+  font-family: Helvetica, sans-serif;
+  font-size: 10pt;
+  padding: 20px 20px 40px;
 }
 .diff {
-	width: 100%;
-	margin: 0 auto 20px;
+  width: 100%;
+  margin: 0 auto 20px;
 }
 .diff td {
-	vertical-align: top;
-	white-space: pre;
-	white-space: pre-wrap;
-	font-family: monospace;
-	font-size: 8pt;
-	width: 50%;
+  vertical-align: top;
+  white-space: pre;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 8pt;
+  width: 50%;
 }
 .diffDeleted span {
-	color: #990000;
-	background: #ffe0e0;
-	border: 1px solid #990000;
+  color: #990000;
+  background: #ffe0e0;
+  border: 1px solid #990000;
 }
 .diffInserted span {
-	color: #009900;
-	background: #e0ffe0;
-	border: 1px solid #009900;
+  color: #009900;
+  background: #e0ffe0;
+  border: 1px solid #009900;
 }
 .diffInserted span, .diffDeleted span {
-	display: block;
-	margin: 1px 0;
+  display: block;
+  margin: 1px 0;
 }
 .diffInserted br, .diffDeleted br {
-	display: none;
+  display: none;
 }
 .diffHeader {
-	background: #ddd;
-	border: 1px solid #555;
+  background: #ddd;
+  border: 1px solid #555;
 }
 .diffHeader td {
-	font-family: Helvetica, sans-serif;
-	font-size: 10pt;
+  font-family: Helvetica, sans-serif;
+  font-size: 10pt;
 }
 h2 {
-	font-weight: normal;
-	margin-top: 40px;
+  font-weight: normal;
+  margin-top: 40px;
 }
 h3 {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 .inverse {
-	background: #666;
-	color: #eee;
-	padding: 10px 20px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	text-align: center;
+  background: #666;
+  color: #eee;
+  padding: 10px 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  text-align: center;
 }
 .aCenter {
-	text-align: center;
+  text-align: center;
 }

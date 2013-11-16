@@ -8,57 +8,33 @@ spl_autoload_register();
 
 
 /**
- * Pre-flight
+ * Load and parse the configuration file
  */
-$db_1 = array (
-                'host'      => '127.0.0.1',
-                'username'  => 'root',
-                'password'  => 'letmein',
-                'database'  => 'employees_1'
-              );
-$db_2 = array (
-                'host'      => '127.0.0.1',
-                'username'  => 'root',
-                'password'  => 'letmein',
-                'database'  => 'employees_2'
-              );
-/*
-  If $config['strict'] is TRUE then the table schemas must match exactly
-  If $config['ignore_comments'] is TRUE then SQL COMMENTS will not be
-  considered diffs
-  If $config['ignore_auto_increment'] is TRUE then the AUTO_INCREMENT index
-  of the DB's tables will not be considered diffs
-*/
-$config = array (
-                  'left'                  => $db_1,
-                  'right'                 => $db_2,
-                  'strict'                => FALSE,
-                  'ignore_comments'       => FALSE,
-                  'ignore_auto_increment' => TRUE
-                );
-$template_path = __DIR__ . '/templates/';
-
+$config = new Get_config();
 
 /**
- * Email Configuration
+ * Configure emailer
  */
-$to = 'you@yourdomain.com';
-$subject = 'Database Schema Comparison';
-$headers = "From: MySQL_Diff <do-not-reply@yourdomain.com>\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+if (isset($config->other['email'])) {
+  $headers = '';
+  if (isset($config->other['email']['from'])) $headers .= "From: MySQL_Diff <" . $config->other['email']['from'] . ">\r\n";
+  $headers .= "MIME-Version: 1.0\r\n";
+  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+}
 
 
 /**
  * Do It
  */
-$MySQL_Diff = new MySQL_Diff($config);
+$MySQL_Diff = new MySQL_Diff($config->diff);
 $data = array( 'diffs' => $MySQL_Diff->diffs );
+$data['config_used'] = $config->other['config_used'];
 
 
 /**
  * Deal with the result (display or email it)
  */
+$template_path = __DIR__ . '/templates/';
 if ($MySQL_Diff->isCLI() === TRUE) {
   // Running from the CLI
   $what = 'differences were detected between the "' . $MySQL_Diff->diffs['left'] . '" and "' . $MySQL_Diff->diffs['right'] . '" databases';
@@ -71,8 +47,10 @@ if ($MySQL_Diff->isCLI() === TRUE) {
     View::factory($template_path . 'index', $data)->render();
     $body = ob_get_clean();
     // Email the result
-    mail($to, $subject, $body, $headers);
-    exit(1); // Let the CLI know that we detected DB differences
+    if ( isset($config->other['email']['to']) && isset($config->other['email']['subject']) && isset($headers) ) {
+      mail($config->other['email']['to'], $config->other['email']['subject'], $body, $headers);
+    }
+    exit(64); // Let the CLI know that we detected DB differences
   } else {
     exit(0); // Let the CLI know that we terminated successfully
   }
