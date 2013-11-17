@@ -12,6 +12,7 @@ spl_autoload_register();
  */
 $config = new Get_config();
 
+
 /**
  * Configure emailer
  */
