@@ -18,7 +18,7 @@ class Get_config {
      * Get configuration file
      */
     $config_path = dirname( dirname(__FILE__) ) . '/config/';
-    if (php_sapi_name() === 'cli') {
+    if (Utilities::isCLI() === TRUE) {
       // Running from the CLI, there might be a configuration file specified in
       // the options
       $options = getopt( '', array('config::') );
@@ -39,7 +39,7 @@ class Get_config {
       } elseif (is_readable($config_path . $config_file . '.ini')) {
         $config_used = $config_path . $config_file . '.ini';
       } else {
-        $this->error('The configuration file you have specified could not be loaded!');
+        Utilities::error('The configuration file you have specified could not be loaded!');
       }
     } else {
       // No configuration file REQUESTed, get the most recent one by default
@@ -53,10 +53,10 @@ class Get_config {
         if (is_readable($default)) {
           $config_used = $default;
         } else {
-          $this->error('The default configuration file could not be loaded!');
+          Utilities::error('The default configuration file could not be loaded!');
         }
       } else {
-        $this->error('No configuration file(s) found!');
+        Utilities::error('No configuration file(s) found!');
       }
     }
     $config = parse_ini_file($config_used, TRUE);
@@ -84,17 +84,7 @@ class Get_config {
       $this->other['config_used'] = $config_used;
       unset($config_used);
     } else {
-      $this->error('Invalid configuration file!');
-    }
-  }
-
-  private function error($error = 'An unknown error occurred!') {
-    $error .= PHP_EOL;
-    if (php_sapi_name() === 'cli') {
-      echo $error;
-      exit(1);
-    } else {
-      die($error);
+      Utilities::error('Invalid configuration file!');
     }
   }
 

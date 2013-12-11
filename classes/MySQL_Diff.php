@@ -24,7 +24,7 @@ class MySQL_Diff {
       }
       catch(PDOException $e) {
         $this->db = FALSE;
-        $this->error($e->getMessage() . PHP_EOL);
+        Utilties::error($e->getMessage() . PHP_EOL);
       }
     }
   }
@@ -158,21 +158,6 @@ class MySQL_Diff {
       return FALSE;
     } else {
       return TRUE;
-    }
-  }
-
-  // Returns TRUE if running from the command line (eg: cron job). Otherwise returns FALSE
-  public function isCLI() {
-    return (php_sapi_name() === 'cli');
-  }
-
-  private function error($error = 'An unknown error occurred!') {
-    $error .= PHP_EOL;
-    if ($this->isCLI()) {
-      echo $error;
-      exit(1);
-    } else {
-      die($error);
     }
   }
 

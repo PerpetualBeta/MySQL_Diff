@@ -36,7 +36,7 @@ $data['config_used'] = $config->other['config_used'];
  * Deal with the result (display or email it)
  */
 $template_path = __DIR__ . '/templates/';
-if ($MySQL_Diff->isCLI() === TRUE) {
+if (Utilities::isCLI() === TRUE) {
   // Running from the CLI
   $what = 'differences were detected between the "' . $MySQL_Diff->diffs['left'] . '" and "' . $MySQL_Diff->diffs['right'] . '" databases';
   $data['message'] = ($MySQL_Diff->mismatch === TRUE)
@@ -44,9 +44,7 @@ if ($MySQL_Diff->isCLI() === TRUE) {
     : '<p>No ' . $what . '.</p>';
   if ($MySQL_Diff->mismatch === TRUE) {
     // Capture the result
-    ob_start();
-    View::factory($template_path . 'index', $data)->render();
-    $body = ob_get_clean();
+    $body = View::factory($template_path . 'index', $data)->render(TRUE);
     // Email the result
     if ( isset($config->other['email']['to']) && isset($config->other['email']['subject']) && isset($headers) ) {
       mail($config->other['email']['to'], $config->other['email']['subject'], $body, $headers);
