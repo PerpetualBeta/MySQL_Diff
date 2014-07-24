@@ -14,3 +14,7 @@ See included example file, [`db_diff.php`](https://github.com/PerpetualBeta/MySQ
 So as to be able to run out-of-the-box, MySQL_Diff includes [szok's](https://github.com/szok) [View class.](https://github.com/szok/View) However, this is not a pre-requisite. MySQL_Diff can be configured as an integrated component of existing frameworks (eg: CodeIgniter), or Continuous Integration suites.
 
 MySQL_Diff IS dependent on [Stephen Morley's](http://stephenmorley.org/) [class.Diff,](http://code.stephenmorley.org/php/diff-implementation/) which is included with this package.
+
+### Further Details
+
+See [MySQL_Diff: Database Schema Difference Reconciliation](http://darkblue.sdf.org/weblog/mysql-diff.html)
